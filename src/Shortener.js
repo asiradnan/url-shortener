@@ -7,7 +7,6 @@ function Shortener(){
     var x = () =>{
         let freshvalue = value.replace("https://","")
         freshvalue = freshvalue.replace("http://","")
-        console.log(freshvalue)
         fetch(`https://sshhoorrtt.vercel.app/shorten/${freshvalue}`)
         .then((response)=>response.json())
         .then((data)=>{
@@ -19,7 +18,7 @@ function Shortener(){
         })
     }
     var cnt = () =>{
-        let freshvalue = data.replace("http://sshhoorrtt.vercel.app/","")
+        let freshvalue = data.replace("https://sshhoorrtt.vercel.app/","")
         fetch(`https://sshhoorrtt.vercel.app/count/${freshvalue}`)
         .then((response)=>response.json())
         .then((data)=>{
