@@ -27,18 +27,18 @@ function Shortener(){
     if (flag===true){
         return (
             <>
-            <input type="text" onChange={(e)=>updateValue(e.target.value)} value={value} placeholder="Enter the long link"/>
-            <button onClick={x}>Shorten</button>
-            <br/>
-            <a href= {data} target="_blank" onClick={cnt}>{data}</a> <p>{count}</p>
+                <input type="text" onChange={(e)=>updateValue(e.target.value)} value={value} placeholder="Enter the long link"/>
+                <button onClick={x}>Shorten</button>
+                <br/>
+                <a href= {data}  onClick={cnt} target="_blank" >{data}</a><p>{count}</p>
             </>
         )
     }
     else{
         return(
             <>
-            <input type="text" onChange={(e)=>updateValue(e.target.value)} value={value} placeholder="Enter the long link"/>
-            <button onClick={x}>Shorten</button>
+                <input type="text" onChange={(e)=>updateValue(e.target.value)} value={value} placeholder="Enter the long link"/>
+                <button onClick={x}>Shorten</button>
             </>
         )
     }
