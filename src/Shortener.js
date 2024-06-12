@@ -10,7 +10,6 @@ function Shortener(){
         fetch(`https://sshhoorrtt.vercel.app/shorten/${freshvalue}`)
         .then((response)=>response.json())
         .then((data)=>{
-            console.log(data)
             updateData(data.shorturl)
             updateCount(data.count)
             updateFlag(true)
