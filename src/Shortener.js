@@ -21,7 +21,6 @@ function Shortener(){
         fetch(`https://sshhoorrtt.vercel.app/count/${freshvalue}`)
         .then((response)=>response.json())
         .then((data)=>{
-            console.log(data)
             updateCount(data.count)
         })
     }
