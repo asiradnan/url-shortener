@@ -18,6 +18,7 @@ function Shortener(){
         })
     }
     var cnt = () =>{
+        console.log(data)
         let freshvalue = data.replace("https://sshhoorrtt.vercel.app/","")
         fetch(`https://sshhoorrtt.vercel.app/count/${freshvalue}`)
         .then((response)=>response.json())
