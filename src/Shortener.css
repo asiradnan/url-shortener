@@ -2,7 +2,7 @@
     background-color: #FADE98;
     display: grid;
     height: 100%;
-    grid-template-rows: 25% 20% 27% 18% 10%;
+    grid-template-rows: 23% 20% 26% 18% 13%;
 }
 header{
     font-family: "Peddana",sans-serif;

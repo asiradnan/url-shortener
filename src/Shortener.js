@@ -6,12 +6,10 @@ const qricon = require("./qr.png")
 function Shortener(){
     const [value, updateValue] = useState("")
     const [data, updateData] = useState("")
-    const [count,updateCount] = useState(0)
     const [copied, updateCopied] = useState(false)
-    const [given, updateGiven] = useState("")
     const [qr, updateQr] = useState("")
     const [showqr,updateShowqr] = useState(false)
-    const [rangeValue, updateRangeValue] = useState(75); 
+    const [rangeValue, updateRangeValue] = useState(85); 
     var x = () =>{
         let freshvalue = value.replace("https://","")
         freshvalue = freshvalue.replace("http://","")
@@ -23,20 +21,9 @@ function Shortener(){
             console.log(data)
             updateData(data.shorturl)
             updateQr(data.qrcode)
-            updateCount(data.count)
-            updateGiven("https://"+freshvalue)
             updateValue("")
-            
         })
         updateRangeValue(70)
-    }
-    var cnt = () =>{
-        let freshvalue = data.replace("https://chottourl.vercel.app/","")
-        fetch(`https://chottourl.vercel.app/count/${freshvalue}`)
-        .then((response)=>response.json())
-        .then((data)=>{
-            updateCount(data.count)
-        })
     } 
     const copy = () =>{
         navigator.clipboard.writeText(data)
