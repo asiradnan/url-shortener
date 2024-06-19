@@ -1,46 +1,91 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import "./Shortener.css"
+const triangle = require("./triangle2.png")
+const copyicon = require("./copy.png")
+const qricon = require("./qr.png")
 function Shortener(){
     const [value, updateValue] = useState("")
     const [data, updateData] = useState("")
-    const [flag,updateFlag] = useState(false)
     const [count,updateCount] = useState(0)
+    const [copied, updateCopied] = useState(false)
+    const [given, updateGiven] = useState("")
+    const [qr, updateQr] = useState("")
+    const [showqr,updateShowqr] = useState(false)
+    const [rangeValue, updateRangeValue] = useState(75); 
     var x = () =>{
         let freshvalue = value.replace("https://","")
         freshvalue = freshvalue.replace("http://","")
-        fetch(`https://sshhoorrtt.vercel.app/shorten/${freshvalue}`)
+        let freshvalue2 = encodeURIComponent(freshvalue)
+        console.log(freshvalue2)
+        fetch(`https://chottourl.vercel.app/shorten/${freshvalue2}`)
         .then((response)=>response.json())
         .then((data)=>{
+            console.log(data)
             updateData(data.shorturl)
+            updateQr(data.qrcode)
             updateCount(data.count)
-            updateFlag(true)
+            updateGiven("https://"+freshvalue)
             updateValue("")
+            
         })
+        updateRangeValue(70)
     }
     var cnt = () =>{
-        let freshvalue = data.replace("http://sshhoorrtt.vercel.app/","")
-        fetch(`https://sshhoorrtt.vercel.app/count/${freshvalue}`)
+        let freshvalue = data.replace("https://chottourl.vercel.app/","")
+        fetch(`https://chottourl.vercel.app/count/${freshvalue}`)
         .then((response)=>response.json())
         .then((data)=>{
             updateCount(data.count)
         })
+    } 
+    const copy = () =>{
+        navigator.clipboard.writeText(data)
+        .then(()=>{
+            updateCopied(true);
+            setTimeout(()=>updateCopied(false),2500);
+        });
     }
-    if (flag===true){
-        return (
-            <>
-                <input type="text" onChange={(e)=>updateValue(e.target.value)} value={value} placeholder="Enter the long link"/>
-                <button onClick={x}>Shorten</button>
-                <br/>
-                <a href= {data}  onClick={cnt} target="_blank" >{data}</a><p>{count}</p>
-            </>
-        )
+    const showqrcode = () =>{
+        updateShowqr(true);
+        setTimeout(()=>updateShowqr(false),5000);
     }
-    else{
-        return(
-            <>
-                <input type="text" onChange={(e)=>updateValue(e.target.value)} value={value} placeholder="Enter the long link"/>
-                <button onClick={x}>Shorten</button>
-            </>
-        )
-    }
+    useEffect(() => {
+        if (rangeValue === 50) x();
+    },[rangeValue]);
+    return(
+        <div className="body">
+            <header>
+                URL Shortener
+            </header>
+            <div className="first">
+                <input type="url" id="longurl" onChange={(e)=>updateValue(e.target.value)} value={value} placeholder="Enter the long URL here"/>
+                <div id="slidercontainer"> 
+                    <input type="range" min="1" max="100" value={rangeValue}
+                        onChange={(e) => updateRangeValue(Math.max(e.target.value,50))}></input>
+                        <button id="shorten" onClick={x}>Shorten</button>
+                </div>
+            </div>
+            <figure>
+                <img id="firsttriangle" src={triangle}></img>
+                <img id="secondtriangle" src={triangle}></img>
+            </figure>
+            <div className="second">
+                <input type="text" readOnly value={data} placeholder="Shortened URL" id="shorturl"></input>
+                <div>
+                { copied && 
+                    <p id="message" >Copied to clipboard!</p> 
+                }
+                { showqr &&
+                    <img id="qrimg" src={`data:image/png;base64,${qr}`} alt="QR Code" />
+                }
+                {/* <p>This url was used: {count} times!</p> */}
+                </div>
+            </div>
+            <div id="buttonsdiv">
+                <button onClick={copy}><img className="buttonimg" src={copyicon}></img>Copy URL</button>
+                <button onClick={showqrcode}><img className="buttonimg" src={qricon}></img>QR Code</button>
+            </div>
+        </div>
+    )
 }
 export default Shortener
