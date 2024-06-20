@@ -23,7 +23,7 @@ function Shortener(){
             updateQr(data.qrcode)
             updateValue("")
         })
-        updateRangeValue(70)
+        updateRangeValue(85)
     } 
     const copy = () =>{
         navigator.clipboard.writeText(data)

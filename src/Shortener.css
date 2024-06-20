@@ -161,5 +161,11 @@ button{
     input[type="range"]{
         height: 12px;
     }
-
+    #qrimg{
+        position: absolute;
+        height: 350px;
+        top: calc(50% - 175px);
+        left: calc(50% - 175px);
+        border: 2px solid rgba(245, 198, 105, 1);     
+    }
 }
