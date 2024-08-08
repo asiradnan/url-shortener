@@ -112,7 +112,7 @@ button{
     background-color: rgba(245, 198, 105, 1);
     font-size: 15px;
     height: 32px;
-    width: 110px;
+    width: 140px;
     display: grid;
     grid-template-columns: 25px auto;
     align-items: center;
