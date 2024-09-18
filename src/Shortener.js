@@ -15,7 +15,7 @@ function Shortener() {
         freshvalue = freshvalue.replace("http://", "")
         let freshvalue2 = encodeURIComponent(freshvalue)
         console.log(freshvalue2)
-        fetch(`https://chottourl.vercel.app/shorten/${freshvalue2}`)
+        fetch(`https://chottourlserver.asiradnan.com/shorten/${freshvalue2}`)
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
