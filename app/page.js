@@ -40,7 +40,7 @@ export default function Home() {
             />
           )}
         </div>
-        <StatsSection totalLinks={1234} totalClicks={5678} activeLinks={890} />
+        <StatsSection totalLinks={0} totalClicks={0} activeLinks={0} />
       </div>
     </div>
   );
