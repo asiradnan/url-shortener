@@ -7,6 +7,8 @@ import { StatsSection } from './components/stats/StatsSection';
 import { useClipboard } from './hooks/useClipboard';
 import { useState } from 'react';
 import { generateShortUrl } from './utils/urlUtils';
+import { useEffect } from 'react';
+import axios from "axios"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +27,26 @@ export default function Home() {
     }
   };
 
+  const [totalClicks, settotalClicks] = useState(0);
+  const [clickCount, setclickCount] = useState(0);
+  const [activeCount, setactiveCount] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://chottourlserver.asiradnan.com/totalcount")
+        console.log(response.data)
+        settotalClicks(parseInt(response.data.total_count)); 
+        setclickCount(parseInt(response.data.click_count));
+        setactiveCount(parseInt(response.data.active_links));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-50">
       <div className="container mx-auto py-16 px-4">
@@ -40,7 +62,7 @@ export default function Home() {
             />
           )}
         </div>
-        <StatsSection totalLinks={0} totalClicks={0} activeLinks={0} />
+        <StatsSection totalLinks={totalClicks} totalClicks={clickCount} activeLinks={activeCount} />
       </div>
     </div>
   );
