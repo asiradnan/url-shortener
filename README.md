@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌐 Chotto URL Frontend
 
-## Getting Started
+This is the **frontend** for Chotto URL, a simple yet powerful **URL shortener** built with Next.js. It provides a clean and user-friendly interface for shortening links and tracking analytics. 🚀
 
-First, run the development server:
+🔗 **Backend Repository:** [Chotto URL Backend](https://github.com/asiradnan/URLshortener)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- 🔗 **Shorten URLs** – Generate a short, shareable link.
+- 📊 **Track Clicks** – View the number of times a link has been accessed.
+- 📌 **Total Links Count** – Keep track of all created short links.
+- ⚡ **Fast & Responsive** – Built with Next.js for speed and performance.
+- 🎨 **Modern UI** – Styled with Tailwind CSS.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠 Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js** – React framework for a fast, SEO-friendly frontend.
+- **Tailwind CSS** – For modern and responsive styling.
+- **Axios** – For making API requests to the backend.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Live
 
-## Deploy on Vercel
+### https://chottourl.asiradnan.com
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📌 Roadmap
+- [ ] User authentication 🔑
+- [ ] Custom short URLs ✍️
+- [ ] Enhanced UI with animations 🎨
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🤝 Contributing
+Pull requests are welcome! If you find a bug or have a feature request, feel free to open an issue. 🙌
+
+---
+
+## 📄 License
+This project is **open-source** and available under the **MIT License**.
+
+---
+
+## 💬 Connect With Me
+- 🔗 [LinkedIn](https://linkedin.com/in/asiradnan)
+- 📧 Email: hello@asiradnan.com
+
+---
+
+Give this repo a ⭐ if you found it useful! 😃
+
