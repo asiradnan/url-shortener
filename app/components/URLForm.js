@@ -9,15 +9,29 @@ export function URLForm({ onSubmit, isLoading }) {
   const validateAndFormatUrl = (inputUrl) => {
     let formattedUrl = inputUrl.trim();
     
+    // Remove any leading or trailing slashes
+    formattedUrl = formattedUrl.replace(/^\/+|\/+$/g, '');
+    
     // Add http:// if missing
     if (!formattedUrl.match(/^https?:\/\//i)) {
       formattedUrl = 'http://' + formattedUrl;
     }
     
     try {
-      // Validate URL
-      new URL(formattedUrl);
-      return formattedUrl;
+      const urlObj = new URL(formattedUrl);
+      
+      // Validate the hostname
+      const hostname = urlObj.hostname;
+      
+      // Check if it's an IP address (v4 or v6)
+      const isIpAddress = /^(\d+\.){3}\d+$|^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/.test(hostname);
+      
+      // If not IP address, check for domain format (must have at least one dot)
+      if (!isIpAddress && !hostname.includes('.') && hostname !== 'localhost') {
+        return null;
+      }
+      
+      return urlObj.toString();
     } catch (e) {
       return null;
     }
@@ -35,7 +49,7 @@ export function URLForm({ onSubmit, isLoading }) {
     const formattedUrl = validateAndFormatUrl(url);
     
     if (!formattedUrl) {
-      setError('Please enter a valid URL');
+      setError('Please enter a valid URL (e.g., example.com or http://example.com)');
       return;
     }
 
@@ -47,7 +61,7 @@ export function URLForm({ onSubmit, isLoading }) {
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
         <div className="flex-1">
           <input
-            type="text"
+            type="text"  // Changed from "url" to "text" to allow more flexible input
             value={url}
             onChange={(e) => {
               setUrl(e.target.value);
