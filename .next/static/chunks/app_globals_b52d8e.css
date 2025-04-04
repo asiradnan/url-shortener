@@ -384,6 +384,10 @@ img, video {
   margin-top: 4rem;
 }
 
+.mt-1 {
+  margin-top: .25rem;
+}
+
 .flex {
   display: flex;
 }
@@ -729,6 +733,11 @@ img, video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
 }
 
 .placeholder-gray-400::placeholder {

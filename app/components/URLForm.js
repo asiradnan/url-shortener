@@ -4,25 +4,63 @@ import { useState } from 'react';
 
 export function URLForm({ onSubmit, isLoading }) {
   const [url, setUrl] = useState('');
+  const [error, setError] = useState('');
+
+  const validateAndFormatUrl = (inputUrl) => {
+    let formattedUrl = inputUrl.trim();
+    
+    // Add http:// if missing
+    if (!formattedUrl.match(/^https?:\/\//i)) {
+      formattedUrl = 'http://' + formattedUrl;
+    }
+    
+    try {
+      // Validate URL
+      new URL(formattedUrl);
+      return formattedUrl;
+    } catch (e) {
+      return null;
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (url.trim()) {
-      onSubmit(url.trim());
+    setError('');
+    
+    if (!url.trim()) {
+      setError('Please enter a URL');
+      return;
     }
+
+    const formattedUrl = validateAndFormatUrl(url);
+    
+    if (!formattedUrl) {
+      setError('Please enter a valid URL');
+      return;
+    }
+
+    onSubmit(formattedUrl);
   };
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-lg px-4">
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-        <input
-          type="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="Enter your long URL here..."
-          className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-sm placeholder-gray-400"
-          required
-        />
+        <div className="flex-1">
+          <input
+            type="text"
+            value={url}
+            onChange={(e) => {
+              setUrl(e.target.value);
+              setError('');
+            }}
+            placeholder="Enter your long URL here..."
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-sm placeholder-gray-400"
+            required
+          />
+          {error && (
+            <p className="mt-1 text-sm text-red-500">{error}</p>
+          )}
+        </div>
         <button
           type="submit"
           disabled={isLoading}

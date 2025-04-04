@@ -85,11 +85,34 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 function URLForm({ onSubmit, isLoading }) {
     const [url, setUrl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
+    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
+    const validateAndFormatUrl = (inputUrl)=>{
+        let formattedUrl = inputUrl.trim();
+        // Add http:// if missing
+        if (!formattedUrl.match(/^https?:\/\//i)) {
+            formattedUrl = 'http://' + formattedUrl;
+        }
+        try {
+            // Validate URL
+            new URL(formattedUrl);
+            return formattedUrl;
+        } catch (e) {
+            return null;
+        }
+    };
     const handleSubmit = (e)=>{
         e.preventDefault();
-        if (url.trim()) {
-            onSubmit(url.trim());
+        setError('');
+        if (!url.trim()) {
+            setError('Please enter a URL');
+            return;
         }
+        const formattedUrl = validateAndFormatUrl(url);
+        if (!formattedUrl) {
+            setError('Please enter a valid URL');
+            return;
+        }
+        onSubmit(formattedUrl);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
         onSubmit: handleSubmit,
@@ -97,16 +120,36 @@ function URLForm({ onSubmit, isLoading }) {
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex flex-col sm:flex-row items-stretch sm:items-center gap-3",
             children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                    type: "url",
-                    value: url,
-                    onChange: (e)=>setUrl(e.target.value),
-                    placeholder: "Enter your long URL here...",
-                    className: "flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-sm placeholder-gray-400",
-                    required: true
-                }, void 0, false, {
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex-1",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                            type: "text",
+                            value: url,
+                            onChange: (e)=>{
+                                setUrl(e.target.value);
+                                setError('');
+                            },
+                            placeholder: "Enter your long URL here...",
+                            className: "w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-sm placeholder-gray-400",
+                            required: true
+                        }, void 0, false, {
+                            fileName: "[project]/app/components/URLForm.js",
+                            lineNumber: 49,
+                            columnNumber: 11
+                        }, this),
+                        error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "mt-1 text-sm text-red-500",
+                            children: error
+                        }, void 0, false, {
+                            fileName: "[project]/app/components/URLForm.js",
+                            lineNumber: 61,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
                     fileName: "[project]/app/components/URLForm.js",
-                    lineNumber: 18,
+                    lineNumber: 48,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -116,18 +159,18 @@ function URLForm({ onSubmit, isLoading }) {
                     children: isLoading ? 'Shortening...' : 'Shorten URL'
                 }, void 0, false, {
                     fileName: "[project]/app/components/URLForm.js",
-                    lineNumber: 26,
+                    lineNumber: 64,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/components/URLForm.js",
-            lineNumber: 17,
+            lineNumber: 47,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/components/URLForm.js",
-        lineNumber: 16,
+        lineNumber: 46,
         columnNumber: 5
     }, this);
 }
@@ -774,8 +817,7 @@ function Home() {
         };
         fetchData();
     }, [
-        shortUrl,
-        copied
+        shortUrl
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-50",
